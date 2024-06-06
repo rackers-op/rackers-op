@@ -1,10 +1,11 @@
 var imagens = [
     "imgs/evolve.gif",
-    "imgs/gestaoConhecimento.png"
+    "imgs/gestaoConhecimento.png",
+    "imgs/indicadores.png"
 ]; // array com as imagens
 
 var links = [
-    "https://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
+    //"https://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
 ];
 
 var tempoImagens =20000; // tempo em milissegundos para exibir cada imagem
