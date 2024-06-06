@@ -1,14 +1,13 @@
 var imagens = [
     "imgs/evolve.gif",
-    "imgs/gestaoConhecimento.png",
-    "imgs/indicadores.png"
+    "imgs/gestaoConhecimento.png"
 ]; // array com as imagens
 
 var links = [
-    //"https://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
+    "https://dti.ag/GestaoaVistahttps://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
 ];
 
-var tempoImagens =20000; // tempo em milissegundos para exibir cada imagem
+var tempoImagens =10000; // tempo em milissegundos para exibir cada imagem
 var tempoLinks = 50000; // tempo em milissegundos para exibir cada link
 var indiceImagens = 0; // índice atual da imagem
 var indiceLinks = 0; // índice atual do link
