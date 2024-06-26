@@ -1,10 +1,10 @@
 var imagens = [
     "imgs/evolve.gif",
-    "imgs/gestaoConhecimento.png"
 ]; // array com as imagens
 
 var links = [
     "https://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
+    "https://app.powerbi.com/reportEmbed?reportId=c0186b20-d9d8-4f61-8138-145dc210519a&autoAuth=true&ctid=9c853ba5-ce7c-4b71-9b14-429ce4db79dd",
 ];
 
 var tempoImagens =10000; // tempo em milissegundos para exibir cada imagem
