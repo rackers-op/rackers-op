@@ -1,5 +1,7 @@
 var imagens = [
-    "imgs/evolve.gif",
+    ["imgs/evolve.gif", 10000],
+    ["imgs/gestaoConhecimento.png", 20000],
+    ["imgs/indicadores.png", 30000],
 ]; // array com as imagens
 
 var links = [
@@ -17,15 +19,18 @@ function mostrarImagem() {
     document.getElementById("minha-imagem").style.display = "block";
     document.getElementById("link-iframe").style.display = "none";
    
-    document.getElementById("minha-imagem").src = imagens[indiceImagens];
+    document.getElementById("minha-imagem").src = imagens[indiceImagens][0];
+
+    timeOut = imagens[indiceImagens][1];
     
     indiceImagens = (indiceImagens + 1) % imagens.length;
     
     if (indiceImagens == 0) {
-        setTimeout(mostrarLink, tempoImagens);
+        //setTimeout(mostrarLink, tempoImagens);
+        setTimeout(mostrarImagem, timeOut);
         
     } else {
-        setTimeout(mostrarImagem, tempoImagens);
+        setTimeout(mostrarImagem, timeOut);
     }
 }
 
