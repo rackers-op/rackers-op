@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/rackers-op/style.css" />
+    <title>Indicadores Hakuna</title>
+  </head>
+  <body>
+    <iframe
+      id="link-iframe"
+      src=""
+      style="display: none"
+      frameborder="0"
+    ></iframe>
+    <img
+      id="minha-imagem-hakuna"
+      src="imagem1.jpg"
+      alt="Imagem que muda de tempo em tempo"
+    />
+    <script>
+      var imagens = [
+        ["/rackers-op/imgs/evolve.gif", 10000],
+        ["/rackers-op/imgs/gestaoConhecimento.png", 20000],
+        ["/rackers-op/imgs/indicadores.png", 30000],
+      ]; // array com as imagens
+
+      var links = ["links Hakuna"];
+
+      var tempoImagens = 10000; // tempo em milissegundos para exibir cada imagem
+      var tempoLinks = 50000; // tempo em milissegundos para exibir cada link
+      var indiceImagens = 0; // índice atual da imagem
+      var indiceLinks = 0; // índice atual do link
+
+      function mostrarImagem() {
+        document.getElementById("minha-imagem-hakuna").style.display = "block";
+        document.getElementById("link-iframe").style.display = "none";
+
+        document.getElementById("minha-imagem-hakuna").src = imagens[indiceImagens][0];
+
+        timeOut = imagens[indiceImagens][1];
+
+        indiceImagens = (indiceImagens + 1) % imagens.length;
+
+        if (indiceImagens == 0) {
+          //setTimeout(mostrarLink, tempoImagens);
+          setTimeout(mostrarImagem, timeOut);
+        } else {
+          setTimeout(mostrarImagem, timeOut);
+        }
+      }
+
+      function mostrarLink() {
+        document.getElementById("link-iframe").style.display = "block";
+        document.getElementById("minha-imagem-hakuna").style.display = "none";
+        document.getElementById("link-iframe").src = links[indiceLinks];
+        indiceLinks = (indiceLinks + 1) % links.length;
+
+        if (indiceLinks == 0) {
+          setTimeout(mostrarImagem, tempoLinks);
+        } else {
+          setTimeout(mostrarLink, tempoLinks);
+        }
+      }
+
+      window.onload = function () {
+        mostrarImagem();
+      };
+    </script>
+  </body>
+</html>

@@ -1,18 +1,132 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operações DTI</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+      img {
+        object-fit: contain;
+      }
+      img,
+      iframe {
+        width: 100%;
+        height: 100vh;
+        border: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+      .show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img
+        id="minha-imagem"
+        src="/rackers-op/imgs/evolve.gif"
+        alt="Imagem GIF"
+        class="show"
+      />
+      <iframe id="iframeGestaoAVista"></iframe>
+      <iframe id="iframeHabilidades"></iframe>
+      <img id="imagemExtra" src="" alt="Imagem Extra" />
+    </div>
 
-<head>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  <title>Cadastro de Links</title>
-</head>
+    <script>
+      const tempoImagem = 10000;
+      const tempoIframe = 10000;
+      const tempoFade = 1000;
+      const tempoImagensExtras = 4000;
 
-<!-- Elemento para exibir imagens -->
-<!-- <img id="minha-imagem" src="" alt="Imagem" style="display: none; width: 400px; height: 300px;"> -->
-    
-    <!-- Elemento para exibir links -->
-    <iframe id="link-iframe" src="" style="display: none" frameborder="0"></iframe>
+      let indiceIframe = 0;
+      let indiceImagemExtra = 0;
 
-<img id="minha-imagem" src="imagem1.jpg" alt="Imagem que muda de tempo em tempo">
-</body>
+      const iframeSources = [
+        "https://app.powerbi.com/view?r=eyJrIjoiYmE2YjM2NzItZTczYy00ZWI3LTgzYjEtYzVkMjMyOTdiYjk3IiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9&pageName=8e82ab5610eddc3b92ef",
+        "https://app.powerbi.com/view?r=eyJrIjoiYWJlMTdmNGEtMmU2OC00ZTFiLTgwZTYtNzhhZDJlZWM5ZGQ4IiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
+      ];
 
+      const imagensExtras = [
+        // "/rackers-op/imgs/indicadores.png",
+        // "/rackers-op/imgs/gestaoConhecimento.png"
+      ];
+
+      const iframesRelatorios = [
+        document.getElementById("iframeGestaoAVista"),
+        document.getElementById("iframeHabilidades"),
+      ];
+
+      const iframeCache = {};
+
+      function loadIframe(index) {
+        if (!iframeCache[index]) {
+          const iframe = iframesRelatorios[index];
+          iframe.src = iframeSources[index];
+          iframeCache[index] = true;
+        }
+      }
+
+      function mostrarImagem() {
+        const imagem = document.getElementById("minha-imagem");
+        imagem.classList.add("show");
+        setTimeout(() => {
+          imagem.classList.remove("show");
+          mostrarRelatorio();
+        }, tempoImagem - tempoFade);
+      }
+
+      function mostrarRelatorio() {
+        iframesRelatorios.forEach((iframe) => iframe.classList.remove("show"));
+        loadIframe(indiceIframe);
+        iframesRelatorios[indiceIframe].classList.add("show");
+
+        setTimeout(() => {
+          iframesRelatorios[indiceIframe].classList.remove("show");
+          indiceIframe = (indiceIframe + 1) % iframesRelatorios.length;
+          if (indiceIframe === 0) {
+            if (imagensExtras.length > 0) {
+              mostrarImagensExtras();
+            } else {
+              mostrarImagem();
+            }
+          } else {
+            mostrarRelatorio();
+          }
+        }, tempoIframe - tempoFade);
+      }
+
+      function mostrarImagensExtras() {
+        const imagemExtra = document.getElementById("imagemExtra");
+        imagemExtra.src = imagensExtras[indiceImagemExtra];
+        imagemExtra.classList.add("show");
+
+        setTimeout(() => {
+          imagemExtra.classList.remove("show");
+          indiceImagemExtra = (indiceImagemExtra + 1) % imagensExtras.length;
+          if (indiceImagemExtra === 0) {
+            mostrarImagem();
+          } else {
+            setTimeout(() => {
+              mostrarImagensExtras();
+            }, tempoFade);
+          }
+        }, tempoImagensExtras - tempoFade);
+      }
+
+      window.onload = function () {
+        mostrarImagem();
+      };
+    </script>
+  </body>
 </html>
