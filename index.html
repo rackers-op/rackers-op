@@ -45,9 +45,10 @@
 
     <script>
       const tempoImagem = 10000;
-      const tempoIframe = 10000;
+      const tempoIframe = 50000;
       const tempoFade = 1000;
       const tempoImagensExtras = 4000;
+      const tempoRefresh = 3600000;
 
       let indiceIframe = 0;
       let indiceImagemExtra = 0;
@@ -75,6 +76,14 @@
           iframe.src = iframeSources[index];
           iframeCache[index] = true;
         }
+      }
+
+      function refreshIframes() {
+        iframeCache = {};
+        iframesRelatorios.forEach((iframe, index) => {
+          iframe.src = '';
+          iframe.src = iframeSources[index];
+        });
       }
 
       function mostrarImagem() {
@@ -126,6 +135,7 @@
 
       window.onload = function () {
         mostrarImagem();
+        setInterval(refreshIframes, tempoRefresh);
       };
     </script>
   </body>
