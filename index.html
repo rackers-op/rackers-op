@@ -42,6 +42,7 @@
       const tempoImagem = 10000;
       const tempoFade = 1000;
       const tempoImagensExtras = 50000;
+      const intervaloAtualizacao = 60000;
 
       let indiceImagemExtra = 0;
 
@@ -77,8 +78,20 @@
         }, tempoImagensExtras - tempoFade);
       }
 
+      function atualizarImagem() {
+        setInterval(() => {
+          const imagemExtra = document.getElementById("imagemExtra");
+          const srcAtual = imagemExtra.src;
+          imagemExtra.src = "";
+          setTimeout(() => {
+            imagemExtra.src = srcAtual;
+          }, 100);
+        }, intervaloAtualizacao);
+      }
+
       window.onload = function () {
         mostrarImagem();
+        atualizarImagem();
       };
     </script>
   </body>
