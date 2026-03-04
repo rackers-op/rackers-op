@@ -1,7 +1,10 @@
 var imagens = [
     ["imgs/evolve.gif", 10000],
-    ["imgs/gestaoConhecimento.png", 20000],
-    ["imgs/indicadores.png", 30000],
+    ["imgs/tv-rackers-aniversario.gif", 20000],
+    ["imgs/tv-rackers-vc-na-rackers.gif", 20000],
+    ["imgs/tv-rackers-estrutura.png", 20000]
+    //["imgs/gestaoConhecimento.png", 20000],
+    //["imgs/indicadores.png", 30000],
 ]; // array com as imagens
 
 var links = [
