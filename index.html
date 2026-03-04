@@ -39,6 +39,7 @@
 
     <script>
       const tempoFade = 1000;
+      const intervaloRefresh = 1800000; // 30 minutos (1800000ms)
 
       let indiceImagem = 0;
 
@@ -52,7 +53,7 @@
       function mostrarImagem() {
         const imagem = document.getElementById("minha-imagem");
         const tempoImagem = imagens[indiceImagem][1];
-        imagem.src = imagens[indiceImagem][0];
+        imagem.src = imagens[indiceImagem][0] + "?t=" + Date.now(); // Cache busting
         imagem.classList.add("show");
         
         setTimeout(() => {
@@ -64,8 +65,16 @@
         }, tempoImagem - tempoFade);
       }
 
+      // Refresh automático da página para buscar atualizações
+      function refreshPagina() {
+        // Usa cache busting para garantir que pega a versão mais recente
+        location.reload(true);
+      }
+
       window.onload = function () {
         mostrarImagem();
+        // Configura refresh automático
+        setInterval(refreshPagina, intervaloRefresh);
       };
     </script>
   </body>
