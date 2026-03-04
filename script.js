@@ -1,8 +1,8 @@
 var imagens = [
-    ["imgs/evolve.gif", 10000],
-    ["imgs/tv-rackers-aniversario.gif", 20000],
-    ["imgs/tv-rackers-vc-na-rackers.gif", 20000],
-    ["imgs/tv-rackers-estrutura.png", 20000]
+    ["imgs/evolve.gif", 100],
+    ["imgs/tv-rackers-aniversario.gif", 100],
+    ["imgs/tv-rackers-vc-na-rackers.gif", 100],
+    ["imgs/tv-rackers-estrutura.png", 100]
     //["imgs/gestaoConhecimento.png", 20000],
     //["imgs/indicadores.png", 30000],
 ]; // array com as imagens
@@ -12,8 +12,8 @@ var links = [
     "https://app.powerbi.com/view?r=eyJrIjoiYWJlMTdmNGEtMmU2OC00ZTFiLTgwZTYtNzhhZDJlZWM5ZGQ4IiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
 ];
 
-var tempoImagens =10000; // tempo em milissegundos para exibir cada imagem
-var tempoLinks = 50000; // tempo em milissegundos para exibir cada link
+var tempoImagens =100; // tempo em milissegundos para exibir cada imagem
+var tempoLinks = 100; // tempo em milissegundos para exibir cada link
 var indiceImagens = 0; // índice atual da imagem
 var indiceLinks = 0; // índice atual do link
 
