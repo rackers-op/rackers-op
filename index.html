@@ -31,67 +31,41 @@
     <div id="container">
       <img
         id="minha-imagem"
-        src="/rackers-op/imgs/evolve.gif"
+        src="imgs/tv-rackers-vc-na-rackers.gif"
         alt="Imagem GIF"
         class="show"
       />
-      <img id="imagemExtra" src="" alt="Imagem Extra" />
     </div>
 
     <script>
-      const tempoImagem = 10000;
       const tempoFade = 1000;
-      const tempoImagensExtras = 50000;
-      const intervaloAtualizacao = 60000;
 
-      let indiceImagemExtra = 0;
+      let indiceImagem = 0;
 
-      const imagensExtras = [
-        "https://ef-screenshoot.s3.sa-east-1.amazonaws.com/gestaoAvista.png",
-        "https://ef-screenshoot.s3.sa-east-1.amazonaws.com/indicadores.png"
+      const imagens = [
+        ["imgs/tv-rackers-vc-na-rackers.gif", 6000],
+        ["imgs/tv-rackers-tribos.png", 10000],
+        ["imgs/tv-rackers-estrutura.png", 10000],
+        ["imgs/tv-rackers-aniversario.gif", 10000]
       ];
 
       function mostrarImagem() {
         const imagem = document.getElementById("minha-imagem");
+        const tempoImagem = imagens[indiceImagem][1];
+        imagem.src = imagens[indiceImagem][0];
         imagem.classList.add("show");
+        
         setTimeout(() => {
           imagem.classList.remove("show");
-          mostrarImagensExtras();
-        }, tempoImagem - tempoFade);
-      }
-
-      function mostrarImagensExtras() {
-        const imagemExtra = document.getElementById("imagemExtra");
-        imagemExtra.src = imagensExtras[indiceImagemExtra];
-        imagemExtra.classList.add("show");
-
-        setTimeout(() => {
-          imagemExtra.classList.remove("show");
-          indiceImagemExtra = (indiceImagemExtra + 1) % imagensExtras.length;
-          if (indiceImagemExtra === 0) {
-            mostrarImagem();
-          } else {
-            setTimeout(() => {
-              mostrarImagensExtras();
-            }, tempoFade);
-          }
-        }, tempoImagensExtras - tempoFade);
-      }
-
-      function atualizarImagem() {
-        setInterval(() => {
-          const imagemExtra = document.getElementById("imagemExtra");
-          const srcAtual = imagemExtra.src;
-          imagemExtra.src = "";
+          indiceImagem = (indiceImagem + 1) % imagens.length;
           setTimeout(() => {
-            imagemExtra.src = srcAtual;
-          }, 100);
-        }, intervaloAtualizacao);
+            mostrarImagem();
+          }, tempoFade);
+        }, tempoImagem - tempoFade);
       }
 
       window.onload = function () {
         mostrarImagem();
-        atualizarImagem();
       };
     </script>
   </body>
