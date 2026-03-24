@@ -1,55 +1,39 @@
-var imagens = [
-    ["imgs/evolve.gif", 100],
-    ["imgs/tv-rackers-aniversario.gif", 100],
-    ["imgs/tv-rackers-vc-na-rackers.gif", 100],
-    ["imgs/tv-rackers-estrutura.png", 100]
-    //["imgs/gestaoConhecimento.png", 20000],
-    //["imgs/indicadores.png", 30000],
-]; // array com as imagens
+import imagemService from './services/imagemService.js';
 
-var links = [
-    "https://app.powerbi.com/view?r=eyJrIjoiYzk5NTQzODctN2E5ZS00NTkwLThhN2QtZGNhYzUxMTJhNzMwIiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
-    "https://app.powerbi.com/view?r=eyJrIjoiYWJlMTdmNGEtMmU2OC00ZTFiLTgwZTYtNzhhZDJlZWM5ZGQ4IiwidCI6IjljODUzYmE1LWNlN2MtNGI3MS05YjE0LTQyOWNlNGRiNzlkZCJ9",
-];
+const tempoFade = 1000;
+const intervaloRefresh = 1800000; // 30 minutos (1800000ms)
 
-var tempoImagens =100; // tempo em milissegundos para exibir cada imagem
-var tempoLinks = 100; // tempo em milissegundos para exibir cada link
-var indiceImagens = 0; // índice atual da imagem
-var indiceLinks = 0; // índice atual do link
+let indiceImagem = 0;
 
-function mostrarImagem() {
-    document.getElementById("minha-imagem").style.display = "block";
-    document.getElementById("link-iframe").style.display = "none";
+const imagensIndex = (imagemService && typeof imagemService.obter === 'function')
+    ? imagemService.obter()
+    : [
+            { url: "imgs/tv-rackers-vc-na-rackers.gif", tempoExibicao: 6000 }
+        ];
 
-    document.getElementById("minha-imagem").src = imagens[indiceImagens][0];
+function mostrarImagemIndex() {
+    const imagem = document.getElementById("minha-imagem");
+    const tempoImagem = imagensIndex[indiceImagem].tempoExibicao;
+    imagem.src = imagensIndex[indiceImagem].url + "?t=" + Date.now(); // Cache busting
+    imagem.classList.add("show");
 
-    timeOut = imagens[indiceImagens][1];
-
-    indiceImagens = (indiceImagens + 1) % imagens.length;
-
-    if (indiceImagens == 0) {
-        //setTimeout(mostrarLink, tempoImagens);
-        setTimeout(mostrarImagem, timeOut);
-
-    } else {
-        setTimeout(mostrarImagem, timeOut);
-    }
+    setTimeout(() => {
+        imagem.classList.remove("show");
+        indiceImagem = (indiceImagem + 1) % imagensIndex.length;
+        setTimeout(() => {
+            mostrarImagemIndex();
+        }, tempoFade);
+    }, Math.max(0, tempoImagem - tempoFade));
 }
 
-function mostrarLink() {
-    document.getElementById("link-iframe").style.display = "block";
-    document.getElementById("minha-imagem").style.display = "none";
-    document.getElementById("link-iframe").src = links[indiceLinks];
-    indiceLinks = (indiceLinks + 1) % links.length;
-
-    if (indiceLinks == 0) {
-        setTimeout(mostrarImagem, tempoLinks);
-
-    } else {
-        setTimeout(mostrarLink, tempoLinks);
-    }
+// Refresh automático da página para buscar atualizações
+function refreshPagina() {
+    // Usa cache busting para garantir que pega a versão mais recente
+    location.reload(true);
 }
 
-window.onload = function () {
-    mostrarImagem();
-};
+window.addEventListener("load", function () {
+    mostrarImagemIndex();
+    // Configura refresh automático
+    setInterval(refreshPagina, intervaloRefresh);
+});

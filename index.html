@@ -37,53 +37,6 @@
       />
     </div>
 
-    <script>
-      const tempoFade = 1000;
-      const intervaloRefresh = 1800000; // 30 minutos (1800000ms)
-
-      let indiceImagem = 0;
-
-      const imagens = [
-        ["imgs/tv-rackers-vc-na-rackers.gif", 6000],
-        ["imgs/tv-rackers-tribos.png", 10000],
-        ["imgs/tv-rackers-estrutura.png", 10000],
-        ["imgs/tv-rackers-aniversario.gif", 12000],
-        ["imgs/tv-rackers_seg.png", 5000],
-        ["imgs/tv-rackers_ter.png", 5000],
-        ["imgs/tv-rackers_qua.png", 5000],
-        ["imgs/tv-rackers_qui.png", 5000],
-        ["imgs/tv-rackers_sex.png", 5000],
-        ["imgs/tv-rackers-principios-01.png", 5000],
-        ["imgs/tv-rackers-principios-02.png", 5000],
-        ["imgs/tv-rackers-julia-raposo.gif", 5000]
-      ];
-
-      function mostrarImagem() {
-        const imagem = document.getElementById("minha-imagem");
-        const tempoImagem = imagens[indiceImagem][1];
-        imagem.src = imagens[indiceImagem][0] + "?t=" + Date.now(); // Cache busting
-        imagem.classList.add("show");
-        
-        setTimeout(() => {
-          imagem.classList.remove("show");
-          indiceImagem = (indiceImagem + 1) % imagens.length;
-          setTimeout(() => {
-            mostrarImagem();
-          }, tempoFade);
-        }, tempoImagem - tempoFade);
-      }
-
-      // Refresh automático da página para buscar atualizações
-      function refreshPagina() {
-        // Usa cache busting para garantir que pega a versão mais recente
-        location.reload(true);
-      }
-
-      window.onload = function () {
-        mostrarImagem();
-        // Configura refresh automático
-        setInterval(refreshPagina, intervaloRefresh);
-      };
-    </script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
